@@ -8,7 +8,7 @@ export const kernelVisual = {
     html += '<div class="k-detect">';
     html += '<span class="kd-tag">链接检测链 · 谁决定 USB4 vs fallback</span>';
     html += '<div class="kd-chain">' + kernelDetect.map(function (s, i) {
-      return '<div class="kd-node" data-i="' + i + '"><b>' + s.n + '</b><small>' + s.d + '</small><i>' + s.t + '</i></div>'
+      return '<div class="kd-node" data-i="' + i + '"><span class="kd-top"><b>' + s.n + '</b><i>' + s.t + '</i></span><small>' + s.d + '</small></div>'
         + (i < kernelDetect.length - 1 ? '<span class="kd-arrow">→</span>' : '');
     }).join('') + '</div>';
     html += '<span class="kd-punch">' + esc(kernelDetectPunch) + '</span>';
@@ -20,19 +20,24 @@ export const kernelVisual = {
     html += '<div class="pane-tag">Host Router · mux 接线图 · 一个 bit 决定一条通路</div>';
     html += '<div class="md-frame">';
     html += kernelMux.rows.map(function (r) {
-      var mux = r.mux ? '<span class="md-mux" data-bit="' + r.mux + '"><i></i><b>' + r.mux + '</b></span>' : '';
+      var gate = r.mux
+        ? '<span class="md-bit" data-bit="' + r.mux + '">' + r.mux + '</span>'
+        : '<span class="md-arw">→</span>';
       return '<div class="md-row" data-key="' + r.id + '" data-tone="' + r.tone + '">'
         + '<span class="md-node src">' + esc(r.src) + '</span>'
-        + '<span class="md-link"></span>'
-        + mux
-        + '<span class="md-link"></span>'
+        + gate
         + '<span class="md-node adp">' + esc(r.adp) + '</span>'
-        + '<span class="md-link"></span>'
+        + '<span class="md-arw">→</span>'
         + '<span class="md-node fab">' + esc(r.fab) + '</span>'
         + '</div>';
     }).join('');
-    // native branch (USB3 fallback)
-    html += '<div class="md-native" data-tone="usb3"><span class="md-link vert"></span><span class="md-node nat">↳ ' + esc(kernelMux.native) + '</span></div>';
+    // native branch (USB3 fallback): same 5-col grid, node sits in adapter column
+    html += '<div class="md-native" data-tone="usb3">'
+      + '<span class="md-node ghost"></span>'
+      + '<span class="md-arw">→</span>'
+      + '<span class="md-node nat">↳ ' + esc(kernelMux.native) + '</span>'
+      + '<span></span><span></span>'
+      + '</div>';
     html += '</div>';
     html += '</div>';
 
@@ -60,7 +65,7 @@ export const kernelVisual = {
       el.classList.toggle('dim', s.key === 'alloc' || s.key === 'end');
     });
     root.querySelector('.md-native').classList.toggle('on', s.bits === 'hco');
-    root.querySelectorAll('.md-mux').forEach(function (el) {
+    root.querySelectorAll('.md-bit').forEach(function (el) {
       var b = s.bits ? s.bits.toUpperCase() : '';
       el.classList.toggle('on', !!b && el.dataset.bit.toUpperCase().indexOf(b) >= 0);
     });

@@ -29,11 +29,11 @@ export const kernelSteps = [
 
 export const kernelConclusion = 'mux 是软件写的：ROUTER_CS_5 的 UTO/HCO/PTO 决定 USB3/PCIe 走 Adapter(隧道) 还是内部 xHCI(原生)；adapter 使能靠 ADP_*_CS_0 的 PE 位；数据面靠 hop 表逐跳转发。';
 export const kernelDetect = [
-  { n: 'CC / PD 协商', d: 'USB4 模式进入 · 固件上报 PARTNER_FLAG_USB4', t: '固件 / TCPC' },
-  { n: 'mux 切 SS lanes', d: '路由到 USB4 Fabric · intel_pmc_mux', t: '硬件' },
-  { n: 'PHY 握手', d: 'link training · 硬件写 PORT_CS_18_TCM', t: '硬件' },
-  { n: '通知 CM', d: 'plug event · 软件读 link_is_usb4', t: '软件' },
-  { n: '软件写 ROUTER_CS_5', d: '配置 UTO / HCO / PTO（隧道 or 原生）', t: '软件' },
+  { n: 'CC/PD 协商', d: 'USB4 模式进入', t: '固件' },
+  { n: 'mux 切 lanes', d: '路由到 Fabric', t: '硬件' },
+  { n: 'PHY 握手', d: '硬件写 TCM', t: '硬件' },
+  { n: '通知 CM', d: '软件读 link_is_usb4', t: '软件' },
+  { n: '写 ROUTER_CS_5', d: '配 UTO/HCO/PTO', t: '软件' },
 ];
 
 export const kernelDetectPunch = '谁决定 USB4 vs fallback：PHY 握手决定链接类型（硬件写 TCM），再通知 CM（软件）据此配置隧道。';
