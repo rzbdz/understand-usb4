@@ -1,0 +1,2 @@
+为了inspect realworld cases 集成into 我们的presentation，我为你提供了代码仓库。
+这个代码仓库，位于 ssh panjunzhong@10.0.50.11 的 /data/home2/panjunzhong/WorkSpace/linux-torvalds。进去之后，你可以在 drivers/usb 和 driver/thunderbolt 里面尽情调查 内核中有的 usb4 相关的内容。当然 ，arch 里面的 dts 文件也可以帮助你，但是我们目前看到大部分usb4的支持，都是在 ACPI boot上面的，你尽情调查，然后补充ppt内容，依然是简洁。

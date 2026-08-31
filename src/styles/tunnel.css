@@ -1,0 +1,90 @@
+.tunnel{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px;height:100%;min-height:0}
+.tunnel-meta{display:flex;align-items:center;gap:12px}
+.protocol-badge{font-family:var(--mono);font-size:13px;letter-spacing:1px;color:var(--ink);border:1px solid var(--line);background:var(--surface);padding:6px 16px;border-radius:999px}
+.tunnel-meta .stage-count{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.tunnel-body{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);gap:16px;min-height:0}
+
+.tunnel-left,.tunnel-right{border:1px solid var(--line);background:var(--surface);padding:14px 16px;min-height:0;display:flex;flex-direction:column;gap:14px;overflow:hidden;border-radius:16px}
+
+/* topology strip */
+.topology{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;flex:none}
+.topo-node{border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:7px 14px;border-radius:8px}
+.topo-node.mid{color:var(--usb3);border-color:var(--usb3)}
+.topo-node.e2e{color:var(--usb4);border-color:var(--usb4);border-style:dashed}
+.topo-node.now{box-shadow:0 0 0 1px var(--accent) inset;color:var(--accent);border-color:var(--accent)}
+.topo-arrow{color:var(--dim);font-size:14px}
+
+/* flow grid */
+.flow-grid{flex:1;display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;align-items:stretch;gap:0;min-height:0}
+.flow-col{display:flex;flex-direction:column;gap:6px;justify-content:center;min-height:0}
+.flow-col .col-head{font-family:var(--cond);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px;text-align:center;line-height:1.05}
+
+.layer{display:grid;grid-template-columns:1fr;gap:3px;padding:8px 11px;border:1px solid var(--line);border-left:4px solid var(--line);background:var(--surface-2);opacity:.42;transition:border-color .3s,background .3s,opacity .3s,box-shadow .3s;border-radius:9px}
+.layer .layer-label{font-family:var(--mono);font-size:13px;color:var(--ink);line-height:1.2;font-weight:500}
+.layer .layer-short{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.layer.ghost{border-style:dashed;opacity:.42}
+.flow-col.src .layer.active{border-color:var(--ptone);border-left-color:var(--ptone);background:var(--ptone-soft);opacity:1;box-shadow:0 0 22px var(--ptone-glow)}
+.flow-col.src .layer.done{opacity:.8;border-left-color:var(--ptone)}
+.flow-col.usb4 .layer.active{border-color:var(--usb4);border-left-color:var(--usb4);background:var(--usb4-soft);opacity:1;box-shadow:0 0 22px var(--usb4-glow)}
+.flow-col.usb4 .layer.done{opacity:.8;border-left-color:var(--usb4)}
+
+/* per-protocol source column tone */
+.flow-col.src[data-tone="usb3"]{--ptone:var(--usb3);--ptone-soft:var(--usb3-soft);--ptone-glow:rgba(77,163,255,.22)}
+.flow-col.src[data-tone="pcie"]{--ptone:var(--pcie);--ptone-soft:var(--pcie-soft);--ptone-glow:rgba(183,140,255,.22)}
+.flow-col.src[data-tone="dp"]{--ptone:var(--dp);--ptone-soft:var(--dp-soft);--ptone-glow:rgba(63,208,228,.22)}
+.flow-col.src[data-tone="usb3"] .col-head{color:var(--usb3)}
+.flow-col.src[data-tone="pcie"] .col-head{color:var(--pcie)}
+.flow-col.src[data-tone="dp"] .col-head{color:var(--dp)}
+.flow-col.usb4 .col-head{color:var(--usb4)}
+
+/* adapter */
+.flow-col.adapter{gap:0;justify-content:center}
+.adapter-region{padding:9px 8px;border:1px dashed var(--line);background:var(--surface-2);text-align:center;font-family:var(--mono);font-size:11px;line-height:1.45;color:var(--muted);opacity:.45;transition:.3s;border-radius:8px}
+.adapter-region + .adapter-region{margin-top:6px}
+.adapter-region.map{border-style:solid}
+.adapter-region.active{border-color:var(--adapter);color:var(--adapter);background:var(--adapter-soft);opacity:1;box-shadow:0 0 18px rgba(255,92,122,.2)}
+.adapter-region.done{opacity:.8;border-color:var(--adapter)}
+
+/* connectors */
+.connector{display:flex;flex-direction:column;align-items:center;color:var(--dim);font-size:20px;transition:color .3s}
+.connector.down{justify-content:flex-end;padding-bottom:8px}
+.connector.up{justify-content:flex-start;padding-top:8px}
+.connector.active{color:var(--usb4)}
+
+.stage-note{font-family:var(--mono);font-size:13px;line-height:1.5;color:var(--muted);border-left:3px solid var(--accent);background:var(--surface-2);padding:10px 13px;flex:none;min-height:38px;border-radius:0 9px 9px 0}
+
+/* packet panel */
+.packet-head-static{font-family:var(--mono);font-size:11px;letter-spacing:1.4px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:9px;display:flex;justify-content:space-between;align-items:center;flex:none}
+.packet-body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:16px;overflow:auto;animation:fade-in .28s ease both}
+.pkt-head{display:flex;flex-direction:column;gap:6px}
+.pkt-title{font-family:var(--cond);font-size:24px;font-weight:700;color:var(--ink);line-height:1.05}
+.pkt-caption{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.5}
+.diagram-note{font-family:var(--mono);font-size:10px;color:var(--dim);margin:0;border-top:1px solid var(--line);padding-top:9px;flex:none}
+
+/* ── packet envelope: wrap + border + rectangle ── */
+.env{border:2px solid var(--usb4);border-radius:14px;background:var(--panel);padding:12px 14px;display:grid;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.14)}
+.env-row{display:flex;gap:8px;flex-wrap:wrap;align-items:stretch}
+.env-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;color:var(--ptone);text-transform:uppercase;margin-bottom:2px}
+.env-payload{border:1.5px dashed var(--ptone);border-radius:11px;padding:10px 12px;background:var(--ptone-soft);display:grid;gap:6px}
+
+.seg{display:inline-flex;align-items:center;padding:9px 13px;border:1px solid;border-radius:8px;font-family:var(--mono);font-size:14px;font-weight:500;white-space:nowrap;letter-spacing:.2px}
+.seg.tone-usb4{color:var(--usb4);border-color:var(--usb4);background:var(--usb4-soft)}
+.seg.tone-usb3{color:var(--usb3);border-color:var(--usb3);background:var(--usb3-soft)}
+.seg.tone-pcie{color:var(--pcie);border-color:var(--pcie);background:var(--pcie-soft)}
+.seg.tone-dp{color:var(--dp);border-color:var(--dp);background:var(--dp-soft)}
+.seg.tone-usb2{color:var(--usb2);border-color:var(--usb2);background:var(--usb2-soft)}
+.seg.tone-adapter{color:var(--adapter);border-color:var(--adapter);background:var(--adapter-soft)}
+
+.stream-tail{color:var(--dim);font-family:var(--mono);font-size:16px;align-self:center}
+
+/* signal lanes */
+.signal{display:grid;gap:12px}
+.lane{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center}
+.lane .lane-name{font-family:var(--mono);font-size:14px;color:var(--usb4);font-weight:500}
+.lane .lane-wave{height:30px;border-radius:8px;opacity:.75;background-size:auto 100%;border:1px solid var(--usb4);background-image:repeating-linear-gradient(90deg,var(--usb4) 0 7px,transparent 7px 16px)}
+
+@media(max-width:900px){
+  .tunnel-body{grid-template-columns:1fr;grid-template-rows:minmax(0,1.1fr) minmax(0,1fr)}
+  .tunnel-left{min-height:270px}
+  .tunnel-right{min-height:220px}
+}

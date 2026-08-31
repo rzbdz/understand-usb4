@@ -1,0 +1,11 @@
+# dependencies / build output
+node_modules/
+dist/
+
+# large reference binary (official spec)
+usb4v2.pdf
+
+# OS junk / Windows ADS
+*Zone.Identifier
+.DS_Store
+Thumbs.db
