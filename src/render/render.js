@@ -59,8 +59,9 @@ export function mount(app, state) {
       visuals[slide.visual].mount(stage.querySelector('.visual-root'), slide);
     }
     const root = shell.querySelector('.visual-root');
-    visuals[slide.visual].update(root, slide, current.step);
-    shell.querySelector('.slide').dataset.step = String(current.step);
+    const frame = slide.frame !== undefined ? slide.frame : current.step;
+    visuals[slide.visual].update(root, slide, frame);
+    shell.querySelector('.slide').dataset.step = String(frame);
 
     shell.querySelector('.aside .chapter').textContent = slide.chapter;
     shell.querySelector('.aside .takeaway').textContent = slide.takeaway;
