@@ -1,7 +1,7 @@
 import { esc } from './escape.js';
 import { figureVisual } from './figure-visual.js';
 import { introVisual } from './intro-visual.js';
-import { kernelVisual } from './kernel-visual.js';
+import { kernelDetectVisual, kernelMuxVisual } from './kernel-visual.js';
 import { flows } from '../data/flows.js';
 
 // ── packet rendering ─────────────────────────────────────────────
@@ -313,6 +313,7 @@ export const visuals = {
   routerpath: simple(routerpathHTML),
   topo: figureVisual,
   intro: introVisual,
-  kernel: kernelVisual,
+  kernelDetect: kernelDetectVisual,
+  kernelMux: kernelMuxVisual,
   multiplex: simple(multiplexHTML),
 };
