@@ -230,7 +230,18 @@
 .intro-punch{border:1px solid var(--usb2);background:var(--usb2-soft);color:var(--usb2);font-family:var(--mono);font-size:12px;padding:9px 14px;border-radius:9px}
 
 /* ── kernel: router mux diagram ── */
-.kern5{display:grid;height:100%;min-height:0;grid-template-rows:minmax(0,1fr) auto;gap:12px}
+.kern5{display:grid;height:100%;min-height:0;grid-template-rows:auto minmax(0,1fr) auto;gap:10px}
+
+.k-detect{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:8px 14px;display:grid;gap:6px}
+.kd-tag{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;color:var(--dim);text-transform:uppercase}
+.kd-chain{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kd-node{display:grid;gap:2px;padding:6px 10px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;background:var(--panel)}
+.kd-node b{font-family:var(--mono);font-size:12px;color:var(--ink)}
+.kd-node small{font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.kd-node i{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--accent)}
+.kd-arrow{color:var(--dim);font-family:var(--mono);font-size:13px}
+.kd-punch{font-family:var(--mono);font-size:11px;color:var(--usb2);line-height:1.5}
+
 .kern-cols{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:16px;min-height:0}
 .kern-left,.kern-right{display:grid;grid-template-rows:auto minmax(0,1fr);gap:9px;min-height:0}
 

@@ -1,10 +1,18 @@
 import { esc } from './escape.js';
-import { kernelMux, kernelSteps, kernelConclusion } from '../data/kernel.js';
+import { kernelMux, kernelSteps, kernelConclusion, kernelDetect, kernelDetectPunch } from '../data/kernel.js';
 
 // Router mux：一个 bit 决定一条数据通路（左图）+ 这个文件/bit 在体系中的作用（右卡）
 export const kernelVisual = {
   mount(root) {
     var html = '<div class="kern5">';
+    html += '<div class="k-detect">';
+    html += '<span class="kd-tag">链接检测链 · 谁决定 USB4 vs fallback</span>';
+    html += '<div class="kd-chain">' + kernelDetect.map(function (s, i) {
+      return '<div class="kd-node" data-i="' + i + '"><b>' + s.n + '</b><small>' + s.d + '</small><i>' + s.t + '</i></div>'
+        + (i < kernelDetect.length - 1 ? '<span class="kd-arrow">→</span>' : '');
+    }).join('') + '</div>';
+    html += '<span class="kd-punch">' + esc(kernelDetectPunch) + '</span>';
+    html += '</div>';
     html += '<div class="kern-cols">';
 
     // left: mux diagram
