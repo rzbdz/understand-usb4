@@ -229,40 +229,50 @@
 .lane-note{font-family:var(--mono);font-size:9.5px;color:var(--muted);line-height:1.5;margin:0;grid-column:1 / -1}
 .intro-punch{border:1px solid var(--usb2);background:var(--usb2-soft);color:var(--usb2);font-family:var(--mono);font-size:12px;padding:9px 14px;border-radius:9px}
 
-/* ── kernel: stepped file tour ── */
-.kern4{display:grid;height:100%;min-height:0;grid-template-rows:minmax(0,1fr) auto;gap:12px}
-.kern-cols{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:16px;min-height:0}
+/* ── kernel: router mux diagram ── */
+.kern5{display:grid;height:100%;min-height:0;grid-template-rows:minmax(0,1fr) auto;gap:12px}
+.kern-cols{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:16px;min-height:0}
 .kern-left,.kern-right{display:grid;grid-template-rows:auto minmax(0,1fr);gap:9px;min-height:0}
-.k-stack{display:grid;gap:6px;align-content:center;min-height:0}
-.k-band{--tone:var(--usb4);--tone-soft:var(--usb4-soft);display:grid;grid-template-columns:170px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-left:4px solid var(--tone);border-radius:10px;background:var(--surface);padding:9px 14px;opacity:.42;transition:opacity .3s,transform .3s,border-color .3s,background .3s,box-shadow .3s}
-.k-band[data-tone="usb4"]{--tone:var(--usb4);--tone-soft:var(--usb4-soft)}
-.k-band[data-tone="adapter"]{--tone:var(--adapter);--tone-soft:var(--adapter-soft)}
-.k-band[data-tone="usb3"]{--tone:var(--usb3);--tone-soft:var(--usb3-soft)}
-.k-band.done{opacity:.62}
-.k-band.active{opacity:1;border-color:var(--tone);background:var(--tone-soft);transform:translateX(6px);box-shadow:0 0 26px var(--tone-glow)}
-.k-band[data-tone="usb4"].active{--tone-glow:rgba(154,167,184,.28)}
-.k-band[data-tone="adapter"].active{--tone-glow:rgba(255,92,122,.28)}
-.k-band[data-tone="usb3"].active{--tone-glow:rgba(77,163,255,.28)}
-.kb-layer{font-family:var(--cond);font-size:17px;font-weight:700;color:var(--tone);line-height:1.05}
-.kb-regs{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.35}
-.kb-file{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600;white-space:nowrap}
-.k-band.active .kb-file{color:var(--tone)}
 
-.k-spot{min-height:0;display:grid;align-content:center;gap:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:20px 22px}
+.md-frame{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:14px 16px;display:grid;gap:10px;align-content:center;min-height:0}
+.md-row{--tone:var(--usb4);display:grid;grid-template-columns:auto auto minmax(96px,auto) auto auto auto auto;gap:8px;align-items:center;justify-content:start;padding:8px 6px;border-radius:10px;transition:background .3s,opacity .3s}
+.md-row[data-tone="usb3"]{--tone:var(--usb3);--tone-soft:var(--usb3-soft);--tone-glow:rgba(77,163,255,.3)}
+.md-row[data-tone="pcie"]{--tone:var(--pcie);--tone-soft:var(--pcie-soft);--tone-glow:rgba(183,140,255,.3)}
+.md-row[data-tone="dp"]{--tone:var(--dp);--tone-soft:var(--dp-soft);--tone-glow:rgba(63,208,228,.3)}
+.md-node{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);white-space:nowrap;transition:all .3s}
+.md-node.src{font-weight:600;color:var(--ink)}
+.md-node.adp{border-color:var(--tone);color:var(--tone);background:var(--tone-soft)}
+.md-node.fab{border-color:var(--usb4);color:var(--usb4);background:var(--usb4-soft)}
+.md-link{width:26px;height:2px;background:var(--line-bright);position:relative;transition:background .3s}
+.md-link:after{content:'';position:absolute;right:-1px;top:-3px;border:3px solid transparent;border-left:5px solid var(--line-bright);transition:border-color .3s}
+.md-mux{display:grid;justify-items:center;gap:3px}
+.md-mux i{width:14px;height:14px;border-radius:50%;border:2px solid var(--line-bright);background:var(--panel);transition:all .3s}
+.md-mux b{font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.4px}
+.md-native{display:none;grid-template-columns:20px auto;gap:8px;align-items:center;padding-left:6px}
+.md-native.on{display:grid}
+.md-native .md-link{width:0;height:26px;background:var(--usb3)}
+.md-native .md-node.nat{border-color:var(--usb3);color:var(--usb3);background:var(--usb3-soft)}
+
+.md-row.on{background:var(--tone-soft)}
+.md-row.on .md-node.src{color:var(--tone)}
+.md-row.on .md-node.adp{box-shadow:0 0 18px var(--tone-glow,#2a2f38)}
+.md-row.on .md-link,.md-row.on .md-link:after{border-color:var(--tone);background:var(--tone)}
+.md-row.on .md-mux i{border-color:var(--tone);background:var(--tone);box-shadow:0 0 12px var(--tone-glow,#2a2f38)}
+.md-row.on .md-mux b{color:var(--tone)}
+.md-row.off{opacity:.45}
+.md-row.off .md-node.adp{border-color:var(--line);color:var(--muted)}
+.md-row.dim{opacity:.55}
+
+.k-spot{min-height:0;display:grid;align-content:center;gap:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:22px 24px}
 .ks-num{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:1px}
-.ks-file{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--tone);line-height:1.1;letter-spacing:-.3px}
-.ks-action,.ks-regs{display:grid;gap:4px}
-.ks-action b,.ks-regs b{font-family:var(--mono);font-size:9px;letter-spacing:1.4px;color:var(--dim);text-transform:uppercase}
-.ks-action{font-family:var(--mono);font-size:14px;color:var(--ink);font-weight:600}
-.ks-regs{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.ks-regs{border-left:3px solid var(--adapter);background:var(--adapter-soft);padding:8px 12px;border-radius:0 8px 8px 0}
-.ks-what{font-family:var(--mono);font-size:13.5px;color:var(--ink);line-height:1.7;border-top:1px dashed var(--line);padding-top:10px}
+.ks-file{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--tone);line-height:1.1;letter-spacing:-.3px}
+.ks-title{font-family:var(--cond);font-size:22px;font-weight:700;color:var(--ink);line-height:1.15}
+.ks-what{font-family:var(--mono);font-size:14px;color:var(--ink);line-height:1.75;border-top:1px dashed var(--line);padding-top:12px}
 .k-spot>*{animation:spot-in .3s ease both}
-
 @keyframes spot-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 .k-conc{border:1px solid var(--usb2);background:var(--usb2-soft);color:var(--usb2);font-family:var(--mono);font-size:12px;padding:10px 14px;border-radius:9px;line-height:1.55}
-@media(max-width:900px){.kern-cols{grid-template-columns:1fr}.k-band{grid-template-columns:130px 1fr}}
+@media(max-width:900px){.kern-cols{grid-template-columns:1fr}.md-row{grid-template-columns:1fr;justify-items:center}.md-link{display:none}}
 
 /* generic protocol tone color utilities */
 .tone-usb4{color:var(--usb4)} .tone-usb3{color:var(--usb3)} .tone-pcie{color:var(--pcie)}
